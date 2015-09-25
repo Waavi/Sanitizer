@@ -2,17 +2,13 @@
 
 namespace Waavi\Sanitizer\Laravel;
 
+use Closure;
 use InvalidArgumentException;
+use Waavi\Sanitizer\Contracts\Filter;
 use Waavi\Sanitizer\Sanitizer;
 
 class Factory
 {
-    /**
-     *  List of default filters
-     *  @var array
-     */
-    protected $defaultFilters;
-
     /**
      *  List of custom filters
      *  @var array
@@ -22,13 +18,11 @@ class Factory
     /**
      * Create a new Sanitizer factory instance.
      *
-     * @param  array  $defaultFilters   List of filters that can be applied
      * @return void
      */
-    public function __construct(array $defaultFilters)
+    public function __construct()
     {
-        $this->defaultFilters = $defaultFilters;
-        $this->customFilters  = [];
+        $this->customFilters = [];
     }
 
     /**
@@ -40,8 +34,7 @@ class Factory
      */
     public function make(array $data, array $rules)
     {
-        $filters   = array_merge($this->defaultFilters, $this->customFilters);
-        $sanitizer = new Sanitizer($data, $rules, $filters);
+        $sanitizer = new Sanitizer($data, $rules, $this->customFilters);
         return $sanitizer;
     }
 
@@ -59,7 +52,7 @@ class Factory
             throw new InvalidArgumentException('The Sanitizer filter name must be a non-empty string.');
         }
 
-        if (!($customFilter instanceof Closure) || !in_array(Contracts\Filter::class, class_implements($customFilter))) {
+        if (!($customFilter instanceof Closure) && !in_array(Filter::class, class_implements($customFilter))) {
             throw new InvalidArgumentException('Custom filter must be a Closure or a class implementing the Waavi\Sanitizer\Contracts\Filter interface.');
         }
 

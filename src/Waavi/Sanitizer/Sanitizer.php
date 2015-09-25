@@ -2,6 +2,7 @@
 
 namespace Waavi\Sanitizer;
 
+use Closure;
 use InvalidArgumentException;
 
 class Sanitizer
@@ -22,7 +23,14 @@ class Sanitizer
      *  Available filters as $name => $classPath
      *  @var array
      */
-    protected $filters;
+    protected $filters = [
+        'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
+        'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
+        'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
+        'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
+        'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
+        'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
+    ];
 
     /**
      *  Create a new sanitizer instance.
@@ -32,19 +40,11 @@ class Sanitizer
      *  @param  array   $filters    Available filters for this sanitizer
      *  @return Sanitizer
      */
-    public function __construct(array $data, array $rules, array $filters = [])
+    public function __construct(array $data, array $rules, array $customFilters = [])
     {
         $this->data    = $data;
         $this->rules   = $this->parseRulesArray($rules);
-        $this->filters = $filters ?:
-        [
-            'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
-            'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
-            'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
-            'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
-            'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
-            'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
-        ];
+        $this->filters = array_merge($this->filters, $customFilters);
     }
 
     /**

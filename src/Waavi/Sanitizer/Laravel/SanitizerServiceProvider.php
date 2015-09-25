@@ -15,14 +15,7 @@ class SanitizerServiceProvider extends ServiceProvider
     {
         // Register the sanitizer factory:
         $this->app->singleton('sanitizer', function ($app) {
-            return new Factory([
-                'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
-                'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
-                'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
-                'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
-                'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
-                'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
-            ]);
+            return new Factory;
         });
 
         // Register make request command
