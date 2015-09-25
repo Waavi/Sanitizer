@@ -24,5 +24,10 @@ class SanitizerServiceProvider extends ServiceProvider
                 'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
             ]);
         });
+
+        // Register make request command
+        $this->commands([
+            RequestMakeCommand::class,
+        ]);
     }
 }
