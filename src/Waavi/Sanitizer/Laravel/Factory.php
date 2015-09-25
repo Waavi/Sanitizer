@@ -1,8 +1,9 @@
 <?php
 
-namespace Waavi\Sanitizer;
+namespace Waavi\Sanitizer\Laravel;
 
 use InvalidArgumentException;
+use Waavi\Sanitizer\Sanitizer;
 
 class Factory
 {

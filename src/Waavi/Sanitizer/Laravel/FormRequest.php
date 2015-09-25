@@ -37,4 +37,14 @@ class FormRequest extends LaravelFormRequest
     {
         return [];
     }
+
+    /**
+     *  Validation rules to be applied to the input.
+     *
+     *  @return void
+     */
+    public function rules()
+    {
+        return [];
+    }
 }
