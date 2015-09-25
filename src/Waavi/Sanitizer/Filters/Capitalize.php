@@ -1,5 +1,7 @@
 <?php
 
+namespace Waavi\Sanitizer\Filters;
+
 use Waavi\Sanitizer\Contracts\Filter;
 
 class Capitalize implements Filter
@@ -10,8 +12,8 @@ class Capitalize implements Filter
      *  @param  string  $value
      *  @return string
      */
-    public static function apply($value, $options = [])
+    public function apply($value, $options = [])
     {
-        return is_string($value) ? ucwords(strtolower($value), FILTER_SANITIZE_STRING) : $value;
+        return is_string($value) ? ucwords(strtolower($value)) : $value;
     }
 }

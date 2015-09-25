@@ -1,5 +1,7 @@
 <?php
 
+namespace Waavi\Sanitizer\Filters;
+
 use Carbon\Carbon;
 use Waavi\Sanitizer\Contracts\Filter;
 
@@ -11,7 +13,7 @@ class FormatDate implements Filter
      *  @param  string  $value
      *  @return string
      */
-    public static function apply($value, $options = [])
+    public function apply($value, $options = [])
     {
         if (sizeof($options) != 2 || !$value) {
             return $value;

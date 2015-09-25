@@ -1,5 +1,7 @@
 <?php
 
+namespace Waavi\Sanitizer\Filters;
+
 use Waavi\Sanitizer\Contracts\Filter;
 
 class EscapeHTML implements Filter
@@ -10,7 +12,7 @@ class EscapeHTML implements Filter
      *  @param  string  $value
      *  @return string
      */
-    public static function apply($value, $options = [])
+    public function apply($value, $options = [])
     {
         return is_string($value) ? filter_var($value, FILTER_SANITIZE_STRING) : $value;
     }

@@ -16,12 +16,12 @@ class SanitizerServiceProvider extends ServiceProvider
         // Register the sanitizer factory:
         $this->app->singleton('sanitizer', function ($app) {
             return new Factory([
-                'capitalize'  => Filters\Capitalize::class,
-                'escape'      => Filters\EscapeHTML::class,
-                'format_date' => Filters\FormatDate::class,
-                'lowercase'   => Filters\Lowercase::class,
-                'uppercase'   => Filters\Uppercase::class,
-                'trim'        => Filters\Trim::class,
+                'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
+                'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
+                'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
+                'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
+                'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
+                'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
             ]);
         });
     }

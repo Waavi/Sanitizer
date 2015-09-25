@@ -66,11 +66,16 @@ class Sanitizer
      */
     protected function parseRuleString($rule)
     {
-        list($name, $options) = explode(':', $rule, 2);
+        if (strpos($rule, ':') !== false) {
+            list($name, $options) = explode(':', $rule, 2);
+            $options              = array_map('trim', explode(',', $options));
+        } else {
+            $name    = $rule;
+            $options = [];
+        }
         if (!$name) {
             return [];
         }
-        $options = array_map('trim', explode(',', $options));
         return compact('name', 'options');
     }
 
@@ -95,6 +100,7 @@ class Sanitizer
         if ($filter instanceof Closure) {
             return call_user_func_array($filter, [$value, $options]);
         } else {
+            $filter = new $filter;
             return $filter->apply($value, $options);
         }
     }
@@ -121,12 +127,11 @@ class Sanitizer
      */
     protected function sanitizeAttribute($attribute, $value)
     {
-        if (!isset($this->rules[$attribute])) {
-            return $value;
-        } else {
-            foreach ($this->rules[$attributes] as $rule) {
+        if (isset($this->rules[$attribute])) {
+            foreach ($this->rules[$attribute] as $rule) {
                 $value = $this->applyFilter($rule['name'], $value, $rule['options']);
             }
         }
+        return $value;
     }
 }

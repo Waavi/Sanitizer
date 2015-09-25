@@ -1,5 +1,7 @@
 <?php
 
+namespace Waavi\Sanitizer\Filters;
+
 use Waavi\Sanitizer\Contracts\Filter;
 
 class Lowercase implements Filter
@@ -10,7 +12,7 @@ class Lowercase implements Filter
      *  @param  string  $value
      *  @return string
      */
-    public static function apply($value, $options = [])
+    public function apply($value, $options = [])
     {
         return is_string($value) ? strtolower($value) : $value;
     }
