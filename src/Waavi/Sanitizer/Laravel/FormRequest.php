@@ -24,7 +24,7 @@ class FormRequest extends LaravelFormRequest
      */
     public function sanitize()
     {
-        $this->sanitizer = Sanitizer::make($this->input(), $this->filters());
+        $this->sanitizer = \Sanitizer::make($this->input(), $this->filters());
         $this->replace($this->sanitizer->sanitize());
     }
 
