@@ -2,6 +2,8 @@
 
 namespace Waavi\Sanitizer;
 
+use InvalidArgumentException;
+
 class Factory
 {
     /**

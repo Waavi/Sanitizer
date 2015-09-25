@@ -53,6 +53,18 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1983-03-21', $data['name']);
     }
 
+    public function test_date_format_requires_two_args()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+        $data = [
+            'name' => '21/03/1983',
+        ];
+        $rules = [
+            'name' => 'format_date:d/m/Y',
+        ];
+        $data = $this->sanitize($data, $rules);
+    }
+
     public function test_lowercase()
     {
         $data = [
@@ -99,5 +111,29 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         ];
         $data = $this->sanitize($data, $rules);
         $this->assertEquals('Hello Everybody', $data['name']);
+    }
+
+    public function test_input_unchanged_if_no_filter()
+    {
+        $data = [
+            'name' => '  HellO EverYboDy   ',
+        ];
+        $rules = [
+            'name' => '',
+        ];
+        $data = $this->sanitize($data, $rules);
+        $this->assertEquals('  HellO EverYboDy   ', $data['name']);
+    }
+
+    public function test_exception_if_non_existing_filter()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+        $data = [
+            'name' => '  HellO EverYboDy   ',
+        ];
+        $rules = [
+            'name' => 'non-filter',
+        ];
+        $data = $this->sanitize($data, $rules);
     }
 }

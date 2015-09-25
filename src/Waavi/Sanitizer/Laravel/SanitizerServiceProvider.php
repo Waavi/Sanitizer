@@ -3,7 +3,6 @@
 namespace Waavi\Sanitizer\Laravel;
 
 use Illuminate\Support\ServiceProvider;
-use Waavi\Sanitizer\Factory;
 
 class SanitizerServiceProvider extends ServiceProvider
 {
