@@ -1,6 +1,6 @@
 {
     "name": "waavi/sanitizer",
-    "version":  "0.1",
+    "version":  "0.2",
     "description": "Data sanitizer and laravel 5 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer"],
     "license": "MIT",
@@ -17,7 +17,7 @@
         "phpunit/phpunit": "~4.0"
     },
     "autoload": {
-        "psr-4": {
+        "psr-0": {
             "Waavi\\Sanitizer\\": "src/"
         }
     },

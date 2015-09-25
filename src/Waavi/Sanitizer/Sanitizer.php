@@ -112,6 +112,13 @@ class Sanitizer
         return $sanitized;
     }
 
+    /**
+     *  Sanitize the given attribute
+     *
+     *  @param  string  $attribute  Attribute name
+     *  @param  mixed   $value      Attribute value
+     *  @return mixed   Sanitized value
+     */
     protected function sanitizeAttribute($attribute, $value)
     {
         if (!isset($this->rules[$attribute])) {
