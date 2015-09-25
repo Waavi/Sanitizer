@@ -25,6 +25,7 @@ class Factory
     public function __construct(array $defaultFilters)
     {
         $this->defaultFilters = $defaultFilters;
+        $this->customFilters  = [];
     }
 
     /**
