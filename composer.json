@@ -1,7 +1,7 @@
 {
     "name": "waavi/sanitizer",
     "version":  "1.0",
-    "description": "Data sanitizer and laravel 5 form requests with input sanitation.",
+    "description": "Data sanitizer and Laravel 5 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer"],
     "license": "MIT",
     "authors": [
