@@ -2,10 +2,13 @@
 
 namespace DummyNamespace;
 
-use Waavi\Sanitizer\Laravel\FormRequest;
+use App\Http\Requests\Request;
+use Waavi\Sanitizer\Laravel\SanitizesInput;
 
-class DummyClass extends FormRequest
+class DummyClass extends Request
 {
+    use SanitizesInput;
+
     /**
      * Determine if the user is authorized to make this request.
      *
