@@ -19,15 +19,16 @@ Although not limited to Laravel 5 users, there are some extensions provided for 
 
 Given a data array with the following format:
 
+```php
     $data = [
         'first_name'    =>  'john',
         'last_name'     =>  '<strong>DOE</strong>',
         'email'         =>  '  JOHn@DoE.com',
         'birthdate'     =>  '06/25/1980',
     ];
-
+```
 We can easily format it using our Sanitizer and the some of Sanitizer's default filters:
-
+```php
     use \Waavi\Sanitizer\Sanitizer;
 
     $filters = [
@@ -39,35 +40,38 @@ We can easily format it using our Sanitizer and the some of Sanitizer's default 
 
     $sanitizer  = new Sanitizer($data, $filters);
     var_dump($sanitizer->sanitize());
+```
 
 Which will yield:
-
+```php
     [
         'first_name'    =>  'John',
         'last_name'     =>  'Doe',
         'email'         =>  'john@doe.com',
         'birthdate'     =>  '1980-06-25',
     ];
-
+```
 It's usage is very similar to Laravel's Validator module, for those who are already familiar with it, although Laravel is not required to use this library.
 
 Filters are applied in the same order they're defined in the $filters array. For each attribute, filters are separered by | and options are specified by suffixing a comma separated list of arguments (see format_date).
 
 ## Available filters
 
-The following filters are included with Sanitize:
+The following filters are available out of the box:
 
-* 'trim': Trims a string
-* 'escape': Escapes HTML and special chars using php's filter_var 
-* 'lowercase': Converts the given string to all lowercase
-* 'uppercase': Convert the given string to uppercase.
-* 'capitalize': Capitalize a string.
-* 'date_format': Always takes two arguments, the date's given format and the target format, following DateTime notation.
+ Filter  | Description
+:---------|:----------
+ **trim**   | Trims a string
+ **escape**    | Escapes HTML and special chars using php's filter_var
+ **lowercase**    | Converts the given string to all lowercase
+ **uppercase**    | Converts the given string to all uppercase
+ **capitalize**    | Capitalize a string
+ **date_format**    | Always takes two arguments, the date's given format and the target format, following DateTime notation.
 
 ## Adding custom filters
 
 You can add your own filters by passing a custom filter array to the Sanitize constructor as the third parameter. For each filter name, either a closure or a full classpath to a Class implementing the Waavi\Sanitizer\Contracts\Filter interface must be provided. Closures must always accept two parameters: $value and an $options array:
-
+```php
     class NoOddNumbersFilter implements Waavi\Sanitizer\Contracts\Filter
     {
         public function apply($value, $options = [])
@@ -89,6 +93,7 @@ You can add your own filters by passing a custom filter array to the Sanitize co
     ];
 
     $sanitize = new Sanitize($data, $filters, $customFilters);
+```
 
 ## Install
 
@@ -98,6 +103,7 @@ To install, just run:
 
 And you're done! If you're using Laravel, in order to be able to access some extra functionality you must register both the Service provider in the providers array in config/app.php, as well as the Sanitizer Facade:
 
+```php
     'providers' => [
         ...
         Waavi\Sanitizer\Laravel\SanitizerServiceProvider::class,
@@ -107,18 +113,45 @@ And you're done! If you're using Laravel, in order to be able to access some ext
         ...
         'Sanitizer' => Waavi\Sanitizer\Laravel\Facade::class,
     ];
-    
+```
+
 ## Laravel goodies
 
 If you are using Laravel, you can use the Sanitizer through the Facade:
-
+```php
     $newData = \Sanitizer::make($data, $filters)->sanitize();
+```
 
-You can also easily extend the Sanitizer library just like you would the Validator library in Laravel, by calling extend from a ServiceProvider like so:
+You can also easily extend the Sanitizer library by adding your own custom filters, just like you would the Validator library in Laravel, by calling extend from a ServiceProvider like so:
 
+```php
     \Sanitizer::extend($filterName, $closureOrClassPath);
+```
 
-Included with WAAVI Sanitizer is a FormRequest extension that allows you to define your data filters right in a FormRequest. To generate a Sanitized Request just execute the included Artisan command:
+You may also Sanitize input in your own FormRequests by using the SanitizesInput trait, and adding a *filters* method that returns the filters that you want applied to the input.
+
+```php
+    namespace App\Http\Requests;
+
+    use App\Http\Requests\Request;
+    use Waavi\Sanitizer\Laravel\SanitizesInput;
+
+    class SanitizedRequest extends Request
+    {
+        use SanitizesInput;
+
+        public function filters()
+        {
+            return [
+                'name'  => 'trim|capitalize',
+                'email' => 'trim',
+            ];
+        }
+
+        /* ... */
+```
+
+To generate a Sanitized Request just execute the included Artisan command:
 
     php artisan make:sanitized-request TestSanitizedRequest
 
