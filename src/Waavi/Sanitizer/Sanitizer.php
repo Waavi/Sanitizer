@@ -25,6 +25,7 @@ class Sanitizer
      */
     protected $filters = [
         'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
+        'cast'        => \Waavi\Sanitizer\Filters\Cast::class,
         'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
         'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
         'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
@@ -99,11 +100,6 @@ class Sanitizer
         // If the filter does not exist, throw an Exception:
         if (!isset($this->filters[$name])) {
             throw new InvalidArgumentException("No filter found by the name of $name");
-        }
-
-        // If no value is given, skip the sanitizer
-        if (empty($value)) {
-            return $value;
         }
 
         $filter = $this->filters[$name];
