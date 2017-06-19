@@ -23,7 +23,7 @@ trait SanitizesInput
     public function sanitize()
     {
         $this->addCustomFilters();
-        $this->sanitizer = \Sanitizer::make($this->input(), $this->filters());
+        $this->sanitizer = app('sanitizer')->make($this->input(), $this->filters());
         $this->replace($this->sanitizer->sanitize());
     }
 
@@ -35,7 +35,7 @@ trait SanitizesInput
     public function addCustomFilters()
     {
         foreach ($this->customFilters() as $name => $filter) {
-            \Sanitizer::extend($name, $filter);
+            app('sanitizer')->extend($name, $filter);
         }
     }
 
