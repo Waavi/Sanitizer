@@ -58,7 +58,7 @@ class Sanitizer
     {
         $parsedRules = [];
         foreach ($rules as $attribute => $attributeRules) {
-            $attributeRulesArray = explode('|', $attributeRules);
+            $attributeRulesArray = is_array($attributeRules) ? $attributeRules : explode('|', $attributeRules);
             foreach ($attributeRulesArray as $attributeRule) {
                 $parsedRule = $this->parseRuleString($attributeRule);
                 if ($parsedRule) {
