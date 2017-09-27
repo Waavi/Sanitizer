@@ -39,6 +39,32 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('  HellO EverYboDy   ', $data['name']);
     }
 
+    public function test_wildcard_filters()
+    {
+        $data = [
+            'name'    => [
+                'first' => ' John ',
+                'last'  => ' Doe ',
+            ],
+            'address' => [
+                'street' => ' Some street ',
+                'city'   => ' New York ',
+            ],
+        ];
+        $rules = [
+            'name.*'       => 'trim',
+            'address.city' => 'trim',
+        ];
+        $data = $this->sanitize($data, $rules);
+
+        $sanitized = [
+            'name'    => ['first' => 'John', 'last' => 'Doe'],
+            'address' => ['street' => ' Some street ', 'city' => 'New York'],
+        ];
+
+        $this->assertEquals($sanitized, $data);
+    }
+
     /**
      *  @test
      *  @expectedException \InvalidArgumentException
