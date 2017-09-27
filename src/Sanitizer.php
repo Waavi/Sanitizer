@@ -60,8 +60,7 @@ class Sanitizer
     {
         $parsedRules = [];
 
-        $response = (new ValidationRuleParser($this->data))
-            ->explode($rules);
+        $response = (new ValidationRuleParser($this->data))->explode($rules);
 
         foreach ($response->rules as $attribute => $attributeRules) {
             foreach ($attributeRules as $attributeRule) {
