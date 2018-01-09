@@ -31,6 +31,8 @@ class Sanitizer
         'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
         'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
         'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
+        'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
+
     ];
 
     /**
