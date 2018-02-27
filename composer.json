@@ -11,6 +11,7 @@
     ],
     "require": {
         "illuminate/support": "~5.3",
+        "illuminate/validation": "~5.3",
         "nesbot/carbon": "~1.0"
     },
     "require-dev": {
