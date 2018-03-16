@@ -9,10 +9,10 @@ trait SanitizesInput
      *
      *  @return void
      */
-    public function validate()
+    public function validateResolved()
     {
         $this->sanitize();
-        parent::validate();
+        parent::validateResolved();
     }
 
     /**
