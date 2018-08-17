@@ -21,6 +21,16 @@
             "Waavi\\Sanitizer\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Waavi\\Sanitizer\\Laravel\\SanitizerServiceProvider"
+            ],
+            "aliases": {
+                "Sanitizer": "Waavi\\Sanitizer\\Laravel\\Facade"
+            }
+        }
+    },
     "minimum-stability": "dev",
     "scripts": {
         "test": "vendor/bin/phpunit"

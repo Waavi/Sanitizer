@@ -39,6 +39,17 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('  HellO EverYboDy   ', $data['name']);
     }
 
+    public function test_array_filters() {
+        $data = [
+            'name' => '  HellO EverYboDy   ',
+        ];
+        $rules = [
+            'name' => ['trim', 'capitalize'],
+        ];
+        $data = $this->sanitize($data, $rules);
+        $this->assertEquals('Hello Everybody', $data['name']);
+    }
+
     /**
      *  @test
      *  @expectedException \InvalidArgumentException

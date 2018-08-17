@@ -7,12 +7,28 @@ trait SanitizesInput
     /**
      *  Sanitize input before validating.
      *
+     *  Kept for backwards compatibility with Laravel <= 5.5
+     *  
+     *  @deprecated Renamed to validateResolved() in Laravel 5.6
      *  @return void
      */
     public function validate()
     {
         $this->sanitize();
         parent::validate();
+    }
+
+    /**
+     *  Sanitize input before validating.
+     *
+     *  Compatible with Laravel 5.6+
+     *
+     *  @return void
+     */
+    public function validateResolved()
+    {
+        $this->sanitize();
+        parent::validateResolved();
     }
 
     /**
@@ -23,7 +39,7 @@ trait SanitizesInput
     public function sanitize()
     {
         $this->addCustomFilters();
-        $this->sanitizer = \Sanitizer::make($this->input(), $this->filters());
+        $this->sanitizer = app('sanitizer')->make($this->input(), $this->filters());
         $this->replace($this->sanitizer->sanitize());
     }
 
@@ -35,7 +51,7 @@ trait SanitizesInput
     public function addCustomFilters()
     {
         foreach ($this->customFilters() as $name => $filter) {
-            \Sanitizer::extend($name, $filter);
+            app('sanitizer')->extend($name, $filter);
         }
     }
 
