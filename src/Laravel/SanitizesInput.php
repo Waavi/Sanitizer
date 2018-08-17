@@ -12,10 +12,10 @@ trait SanitizesInput
      *  @deprecated Renamed to validateResolved() in Laravel 5.6
      *  @return void
      */
-    public function validate()
+    public function validateResolved()
     {
         $this->sanitize();
-        parent::validate();
+        parent::validateResolved();
     }
 
     /**
