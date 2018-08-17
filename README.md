@@ -70,13 +70,13 @@ The following filters are available out of the box:
  **uppercase**    | Converts the given string to all uppercase
  **capitalize**    | Capitalize a string
  **cast**           | Casts a variable into the given type. Options are: integer, float, string, boolean, object, array and Laravel Collection.
- **date_format**    | Always takes two arguments, the date's given format and the target format, following DateTime notation.
+ **format_date**    | Always takes two arguments, the date's given format and the target format, following DateTime notation.
 
 ## Adding custom filters
 
 You can add your own filters by passing a custom filter array to the Sanitize constructor as the third parameter. For each filter name, either a closure or a full classpath to a Class implementing the Waavi\Sanitizer\Contracts\Filter interface must be provided. Closures must always accept two parameters: $value and an $options array:
 ```php
-    class NoOddNumbersFilter implements Waavi\Sanitizer\Contracts\Filter
+    class RemoveStringsFilter implements Waavi\Sanitizer\Contracts\Filter
     {
         public function apply($value, $options = [])
         {
