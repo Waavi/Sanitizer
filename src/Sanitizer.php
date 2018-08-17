@@ -3,6 +3,8 @@
 namespace Waavi\Sanitizer;
 
 use Closure;
+use Illuminate\Support\Arr;
+use Illuminate\Validation\ValidationRuleParser;
 use InvalidArgumentException;
 
 class Sanitizer
@@ -59,15 +61,18 @@ class Sanitizer
     protected function parseRulesArray(array $rules)
     {
         $parsedRules = [];
-        foreach ($rules as $attribute => $attributeRules) {
-            $attributeRulesArray = is_array($attributeRules) ? $attributeRules : explode('|', $attributeRules);
-            foreach ($attributeRulesArray as $attributeRule) {
+
+        $rawRules = (new ValidationRuleParser($this->data))->explode($rules);
+
+        foreach ($rawRules->rules as $attribute => $attributeRules) {
+            foreach ($attributeRules as $attributeRule) {
                 $parsedRule = $this->parseRuleString($attributeRule);
                 if ($parsedRule) {
                     $parsedRules[$attribute][] = $parsedRule;
                 }
             }
         }
+
         return $parsedRules;
     }
 
@@ -119,10 +124,18 @@ class Sanitizer
      */
     public function sanitize()
     {
-        $sanitized = [];
-        foreach ($this->data as $name => $value) {
-            $sanitized[$name] = $this->sanitizeAttribute($name, $value);
+        $sanitized = $this->data;
+
+        foreach ($this->rules as $attr => $rules) {
+            $value = Arr::get($this->data, $attr);
+
+            foreach ($rules as $rule) {
+                $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+            }
+
+            Arr::set($sanitized, $attr, $value);
         }
+
         return $sanitized;
     }
 
