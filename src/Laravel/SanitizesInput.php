@@ -7,12 +7,28 @@ trait SanitizesInput
     /**
      *  Sanitize input before validating.
      *
+     *  Kept for backwards compatibility with Laravel <= 5.5
+     *  
+     *  @deprecated Renamed to validateResolved() in Laravel 5.6
      *  @return void
      */
     public function validate()
     {
         $this->sanitize();
         parent::validate();
+    }
+
+    /**
+     *  Sanitize input before validating.
+     *
+     *  Compatible with Laravel 5.6+
+     *
+     *  @return void
+     */
+    public function validateResolved()
+    {
+        $this->sanitize();
+        parent::validateResolved();
     }
 
     /**
