@@ -124,7 +124,7 @@ class Sanitizer
      */
     public function sanitize()
     {
-        $sanitized = $this->data;;
+        $sanitized = $this->data;
 
         foreach ($this->rules as $attr => $rules) {
             $value = Arr::get($this->data, $attr);
