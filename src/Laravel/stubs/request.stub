@@ -2,10 +2,10 @@
 
 namespace DummyNamespace;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Waavi\Sanitizer\Laravel\SanitizesInput;
 
-class DummyClass extends Request
+class DummyClass extends FormRequest
 {
     use SanitizesInput;
 
