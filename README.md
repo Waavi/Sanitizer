@@ -26,7 +26,8 @@ Given a data array with the following format:
         'email'         =>  '  JOHn@DoE.com',
         'birthdate'     =>  '06/25/1980',
         'jsonVar'       =>  '{"name":"value"}',
-        'description'   =>  '<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>'
+        'description'   =>  '<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>',
+        'phone'         =>  '+08(096)90-123-45q',
     ];
 ```
 We can easily format it using our Sanitizer and the some of Sanitizer's default filters:
@@ -39,7 +40,8 @@ We can easily format it using our Sanitizer and the some of Sanitizer's default 
         'email'         =>  'trim|escape|lowercase',
         'birthdate'     =>  'trim|format_date:m/d/Y, Y-m-d',
         'jsonVar'       =>  'cast:array',
-        'description'   =>  'strip_tags'
+        'description'   =>  'strip_tags',
+        'phone'         =>  'digit',
     ];
 
     $sanitizer  = new Sanitizer($data, $filters);
@@ -54,7 +56,8 @@ Which will yield:
         'email'         =>  'john@doe.com',
         'birthdate'     =>  '1980-06-25',
         'jsonVar'       =>  '["name" => "value"]',
-        'description'   =>  'Test paragraph. Other text'
+        'description'   =>  'Test paragraph. Other text',
+        'phone'         =>  '080969012345',
     ];
 ```
 It's usage is very similar to Laravel's Validator module, for those who are already familiar with it, although Laravel is not required to use this library.
@@ -75,6 +78,7 @@ The following filters are available out of the box:
  **cast**           | Casts a variable into the given type. Options are: integer, float, string, boolean, object, array and Laravel Collection.
  **format_date**    | Always takes two arguments, the date's given format and the target format, following DateTime notation.
  **strip_tags**    | Strip HTML and PHP tags using php's strip_tags
+ **digit**    | Get only digit characters from the string
 
 
 ## Adding custom filters
