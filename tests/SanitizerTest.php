@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class SanitizerTest extends PHPUnit_Framework_TestCase
+class SanitizerTest extends TestCase
 {
     /**
      * @param $data
@@ -78,11 +79,10 @@ class SanitizerTest extends PHPUnit_Framework_TestCase
 
     /**
      *  @test
-     *  @expectedException \InvalidArgumentException
      */
     public function it_throws_exception_if_non_existing_filter()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         $data = [
             'name' => '  HellO EverYboDy   ',
         ];

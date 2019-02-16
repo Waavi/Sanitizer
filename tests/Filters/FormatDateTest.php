@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class FormatDateTest extends PHPUnit_Framework_TestCase
+class FormatDateTest extends TestCase
 {
     /**
      * @param $data
@@ -32,10 +33,10 @@ class FormatDateTest extends PHPUnit_Framework_TestCase
 
     /**
      *  @test
-     *  @expectedException \InvalidArgumentException
      */
     public function it_requires_two_arguments()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $data = [
             'name' => '21/03/1983',
         ];

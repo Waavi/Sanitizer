@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class EscapeHTMLTest extends PHPUnit_Framework_TestCase
+class EscapeHTMLTest extends TestCase
 {
     /**
      * @param $data

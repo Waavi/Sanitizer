@@ -1,9 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Laravel\Factory;
 use Waavi\Sanitizer\Sanitizer;
 
-class FactoryTest extends PHPUnit_Framework_TestCase
+class FactoryTest extends TestCase
 {
     public function sanitize($data, $rules)
     {
