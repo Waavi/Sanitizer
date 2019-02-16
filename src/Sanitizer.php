@@ -34,7 +34,7 @@ class Sanitizer
         'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
         'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
         'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
-
+        'digit'       => \Waavi\Sanitizer\Filters\Digit::class,
     ];
 
     /**
@@ -124,7 +124,7 @@ class Sanitizer
      */
     public function sanitize()
     {
-        $sanitized = $this->data;;
+        $sanitized = $this->data;
 
         foreach ($this->rules as $attr => $rules) {
             $value = Arr::get($this->data, $attr);
