@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class TrimTest extends PHPUnit_Framework_TestCase
+class TrimTest extends TestCase
 {
     /**
      * @param $data

@@ -1,8 +1,9 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class UppercaseTest extends PHPUnit_Framework_TestCase
+class UppercaseTest extends TestCase
 {
     /**
      * @param $data
