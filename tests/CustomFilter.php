@@ -1,5 +1,6 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Contracts\Filter;
 
 class CustomFilter implements Filter

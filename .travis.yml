@@ -3,11 +3,15 @@ language: php
 php:
   - 5.6
   - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
   - hhvm
 
 matrix:
   allow_failures:
     - php: hhvm
+    - php: 5.6
 
 before_script:
   - travis_retry composer self-update

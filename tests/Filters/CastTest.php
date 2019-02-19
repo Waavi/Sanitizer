@@ -1,9 +1,12 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
-class CastTest extends PHPUnit_Framework_TestCase
+class CastTest extends TestCase
 {
+    use _PHPUnitShim;
+
     /**
      * @param $data
      * @param $rules
@@ -17,19 +20,19 @@ class CastTest extends PHPUnit_Framework_TestCase
 
     /**
      *  @test
-     *  @expectedException \InvalidArgumentException
      */
     public function it_throws_exception_when_no_cast_type_is_set()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->sanitize(['name' => 'Name'], ['name' => 'cast']);
     }
 
     /**
      *  @test
-     *  @expectedException \InvalidArgumentException
      */
     public function it_throws_exception_when_non_existing_cast_type_is_set()
     {
+        $this->expectException(\InvalidArgumentException::class);
         $this->sanitize(['name' => 'Name'], ['name' => 'cast:bullshit']);
     }
 
@@ -39,7 +42,7 @@ class CastTest extends PHPUnit_Framework_TestCase
     public function it_casts_to_integer()
     {
         $results = $this->sanitize(['var' => '15.6'], ['var' => 'cast:integer']);
-        $this->assertInternalType('int', $results['var']);
+        $this->assertIsInt($results['var']);
         $this->assertEquals(15, $results['var']);
     }
 
@@ -49,7 +52,7 @@ class CastTest extends PHPUnit_Framework_TestCase
     public function it_casts_to_float()
     {
         $results = $this->sanitize(['var' => '15.6'], ['var' => 'cast:double']);
-        $this->assertInternalType('float', $results['var']);
+        $this->assertIsFloat($results['var']);
         $this->assertEquals(15.6, $results['var']);
     }
 
@@ -59,7 +62,7 @@ class CastTest extends PHPUnit_Framework_TestCase
     public function it_casts_to_string()
     {
         $results = $this->sanitize(['var' => 15], ['var' => 'cast:string']);
-        $this->assertInternalType('string', $results['var']);
+        $this->assertIsString($results['var']);
         $this->assertEquals('15', $results['var']);
     }
 
@@ -69,7 +72,7 @@ class CastTest extends PHPUnit_Framework_TestCase
     public function it_casts_to_boolean()
     {
         $results = $this->sanitize(['var' => 15], ['var' => 'cast:boolean']);
-        $this->assertInternalType('boolean', $results['var']);
+        $this->assertIsBool($results['var']);
         $this->assertEquals(true, $results['var']);
     }
 
@@ -116,7 +119,7 @@ class CastTest extends PHPUnit_Framework_TestCase
         ];
         $encodedData = json_encode($data);
         $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:array']);
-        $this->assertInternalType('array', $results['var']);
+        $this->assertIsArray($results['var']);
         $this->assertEquals('Name', $results['var']['name']);
         $this->assertEquals(15.6, $results['var']['cost']);
     }
