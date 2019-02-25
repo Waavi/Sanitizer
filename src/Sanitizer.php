@@ -129,6 +129,10 @@ class Sanitizer
         foreach ($this->rules as $attr => $rules) {
             $value = Arr::get($this->data, $attr);
 
+            if($value === null) {
+                continue;
+            }
+
             foreach ($rules as $rule) {
                 $value = $this->applyFilter($rule['name'], $value, $rule['options']);
             }
