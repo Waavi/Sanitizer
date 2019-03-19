@@ -127,13 +127,15 @@ class Sanitizer
         $sanitized = $this->data;
 
         foreach ($this->rules as $attr => $rules) {
-            $value = Arr::get($this->data, $attr);
+            if (Arr::has($this->data, $attr)) {
+                $value = Arr::get($this->data, $attr);
 
-            foreach ($rules as $rule) {
-                $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                foreach ($rules as $rule) {
+                    $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                }
+
+                Arr::set($sanitized, $attr, $value);
             }
-
-            Arr::set($sanitized, $attr, $value);
         }
 
         return $sanitized;
