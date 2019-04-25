@@ -91,4 +91,22 @@ class SanitizerTest extends TestCase
         ];
         $data = $this->sanitize($data, $rules);
     }
+
+    public function test_it_should_only_sanitize_passed_data()
+    {
+        $data = [
+            'title' => ' Hello WoRlD '
+        ];
+
+        $rules = [
+            'title' => 'trim',
+            'name' => 'trim|escape'
+        ];
+
+        $data = $this->sanitize($data, $rules);
+
+        $this->assertArrayNotHasKey('name', $data);
+        $this->assertArrayHasKey('title', $data);
+        $this->assertEquals(1, count($data));
+    }
 }
