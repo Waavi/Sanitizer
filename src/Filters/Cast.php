@@ -2,6 +2,7 @@
 
 namespace Waavi\Sanitizer\Filters;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Waavi\Sanitizer\Contracts\Filter;
 
@@ -36,6 +37,13 @@ class Cast implements Filter
             case 'collection':
                 $array = is_array($value) ? $value : json_decode($value, true);
                 return new Collection($array);
+            case 'carbon':
+                if (isset($options[1])) {
+                    return Carbon::createFromFormat($options[1], $value);
+                }
+                var_dump(Carbon::parse($value));
+
+                return Carbon::parse($value);
             default:
                 throw new \InvalidArgumentException("Wrong Sanitizer casting format: {$type}.");
         }

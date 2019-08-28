@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Waavi\Sanitizer\Sanitizer;
 
@@ -152,5 +153,34 @@ class CastTest extends TestCase
         $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:collection']);
         $this->assertInstanceOf('\Illuminate\Support\Collection', $results['var']);
         $this->assertEquals('Name', $results['var']->first());
+    }
+
+    /**
+     *  @test
+     */
+    public function it_casts_to_carbon_instance()
+    {
+        $results = $this->sanitize(['var' => '02-03-04'], ['var' => 'cast:carbon']);
+        $this->assertInstanceOf(Carbon::class, $results['var']);
+        $this->assertEquals("2002-03-04 00:00:00", (string) $results['var']);
+    }
+
+    /**
+     *  @test
+     */
+    public function it_casts_to_carbon_instance_with_custom_format()
+    {
+        $results = $this->sanitize(['var' => '02/03/04'], ['var' => 'cast:carbon,!d/m/y']);
+        $this->assertInstanceOf(Carbon::class, $results['var']);
+        $this->assertEquals("2004-03-02 00:00:00", (string) $results['var']);
+    }
+
+    /**
+     *  @test
+     */
+    public function it_throws_exception_if_custom_date_format_invalid()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $results = $this->sanitize(['var' => '02-03/04'], ['var' => 'cast:carbon,d/m/Y']);
     }
 }
