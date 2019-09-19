@@ -3,15 +3,13 @@
     "description": "Data sanitizer and Laravel 5 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer", "input", "transform input", "input filter"],
     "license": "MIT",
-    "authors": [
-        {
-            "name": "William Wallace San Paulo",
-            "email": "info@waavi.com"
-        }
-    ],
+    "authors": [{
+        "name": "William Wallace San Paulo",
+        "email": "info@waavi.com"
+    }],
     "require": {
-        "illuminate/support": "~5.3",
-        "illuminate/validation": "~5.3",
+        "illuminate/support": "~5.3|~6.0",
+        "illuminate/validation": "~5.3|~6.0",
         "nesbot/carbon": "~1.0|~2.0"
     },
     "require-dev": {
