@@ -14,6 +14,6 @@ class Uppercase implements Filter
      */
     public function apply($value, $options = [])
     {
-        return is_string($value) ? strtoupper($value) : $value;
+        return is_string($value) ? mb_strtoupper($value) : $value;
     }
 }

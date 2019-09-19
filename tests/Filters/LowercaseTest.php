@@ -30,4 +30,19 @@ class LowercaseTest extends TestCase
         $data = $this->sanitize($data, $rules);
         $this->assertEquals('hello everybody', $data['name']);
     }
+
+    /**
+     *  @test
+     */
+    public function it_lowercases_special_characters_strings()
+    {
+        $data = [
+            'name' => 'Τάχιστη αλώπηξ',
+        ];
+        $rules = [
+            'name' => 'lowercase',
+        ];
+        $data = $this->sanitize($data, $rules);
+        $this->assertEquals('τάχιστη αλώπηξ', $data['name']);
+    }
 }

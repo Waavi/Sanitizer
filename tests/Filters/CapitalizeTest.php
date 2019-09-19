@@ -24,4 +24,13 @@ class CapitalizeTest extends TestCase
         $result = $this->sanitize(['name' => ' jon snow 145'], ['name' => 'capitalize']);
         $this->assertEquals(' Jon Snow 145', $result['name']);
     }
+
+    /**
+     *  @test
+     */
+    public function it_capitalizes_special_characters()
+    {
+        $result = $this->sanitize(['name' => 'Τάχιστη αλώπηξ'], ['name' => 'capitalize']);
+        $this->assertEquals('Τάχιστη Αλώπηξ', $result['name']);
+    }
 }

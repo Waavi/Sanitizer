@@ -30,4 +30,19 @@ class UppercaseTest extends TestCase
         $data = $this->sanitize($data, $rules);
         $this->assertEquals('HELLO EVERYBODY', $data['name']);
     }
+
+    /**
+     *  @test
+     */
+    public function it_uppercases_special_characters_strings()
+    {
+        $data = [
+            'name' => 'Τάχιστη αλώπηξ',
+        ];
+        $rules = [
+            'name' => 'uppercase',
+        ];
+        $data = $this->sanitize($data, $rules);
+        $this->assertEquals('ΤΆΧΙΣΤΗ ΑΛΏΠΗΞ', $data['name']);
+    }
 }
