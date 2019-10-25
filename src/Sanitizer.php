@@ -5,6 +5,7 @@ namespace Waavi\Sanitizer;
 use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationRuleParser;
+use Illuminate\Validation\ClosureValidationRule;
 use InvalidArgumentException;
 
 class Sanitizer
@@ -48,7 +49,7 @@ class Sanitizer
     public function __construct(array $data, array $rules, array $customFilters = [])
     {
         $this->data    = $data;
-        $this->rules   = $this->parseRulesArray($rules);
+        $this->rules   = $this->parseRules($rules);
         $this->filters = array_merge($this->filters, $customFilters);
     }
 
@@ -58,7 +59,7 @@ class Sanitizer
      *  @param  array $rules
      *  @return array
      */
-    protected function parseRulesArray(array $rules)
+    protected function parseRules(array $rules)
     {
         $parsedRules = [];
 
@@ -66,7 +67,7 @@ class Sanitizer
 
         foreach ($rawRules->rules as $attribute => $attributeRules) {
             foreach ($attributeRules as $attributeRule) {
-                $parsedRule = $this->parseRuleString($attributeRule);
+                $parsedRule = $this->parseRule($attributeRule);
                 if ($parsedRule) {
                     $parsedRules[$attribute][] = $parsedRule;
                 }
@@ -74,6 +75,23 @@ class Sanitizer
         }
 
         return $parsedRules;
+    }
+
+    /**
+     *  Parse a rule.
+     *
+     *  @param  string|Closure $rule
+     *  @return array|Closure
+     */
+    protected function parseRule($rule)
+    {
+        if (is_string($rule)) {
+            return $this->parseRuleString();
+        } elseif ($rule instanceof ClosureValidationRule) {
+            return $rule->callback;
+        } else {
+            throw new InvalidArgumentException("Unsupported rule type.");
+        }
     }
 
     /**
@@ -99,27 +117,36 @@ class Sanitizer
 
     /**
      *  Apply the given filter by its name
-     *  @param  $name
+     *
+     *  @param  string|Closure $rule
      *  @return Filter
      */
-    protected function applyFilter($name, $value, $options = [])
+    protected function applyFilter($rule, $value)
     {
+        if ($rule instanceof Closure) {
+            return call_user_func($rule, $value);
+        }
+
+        $name    = $rule['name'];
+        $options = $rule['options'];
+
         // If the filter does not exist, throw an Exception:
         if (!isset($this->filters[$name])) {
             throw new InvalidArgumentException("No filter found by the name of $name");
         }
 
         $filter = $this->filters[$name];
+
         if ($filter instanceof Closure) {
             return call_user_func_array($filter, [$value, $options]);
         } else {
-            $filter = new $filter;
-            return $filter->apply($value, $options);
+            return (new $filter)->apply($value, $options);
         }
     }
 
     /**
      *  Sanitize the given data
+     *
      *  @return array
      */
     public function sanitize()
@@ -129,32 +156,12 @@ class Sanitizer
         foreach ($this->rules as $attr => $rules) {
             if (Arr::has($this->data, $attr)) {
                 $value = Arr::get($this->data, $attr);
-
-                foreach ($rules as $rule) {
-                    $value = $this->applyFilter($rule['name'], $value, $rule['options']);
-                }
-
+                foreach ($rules as $rule)
+                    $value = $this->applyFilter($rule, $value);
                 Arr::set($sanitized, $attr, $value);
             }
         }
 
         return $sanitized;
-    }
-
-    /**
-     *  Sanitize the given attribute
-     *
-     *  @param  string  $attribute  Attribute name
-     *  @param  mixed   $value      Attribute value
-     *  @return mixed   Sanitized value
-     */
-    protected function sanitizeAttribute($attribute, $value)
-    {
-        if (isset($this->rules[$attribute])) {
-            foreach ($this->rules[$attribute] as $rule) {
-                $value = $this->applyFilter($rule['name'], $value, $rule['options']);
-            }
-        }
-        return $value;
     }
 }
