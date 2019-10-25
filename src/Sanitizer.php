@@ -86,7 +86,7 @@ class Sanitizer
     protected function parseRule($rule)
     {
         if (is_string($rule)) {
-            return $this->parseRuleString();
+            return $this->parseRuleString($rule);
         } elseif ($rule instanceof ClosureValidationRule) {
             return $rule->callback;
         } else {
