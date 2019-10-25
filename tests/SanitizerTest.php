@@ -111,13 +111,13 @@ class SanitizerTest extends TestCase
     public function test_closure_rule()
     {
         $data = [
-            'name' => 'Sina'
+            'name' => ' Sina '
         ];
 
         $rules = [
-            'name' => function ($value) {
+            'name' => ['trim', function ($value) {
                 return strtoupper($value);
-            }
+            }]
         ];
 
         $data = $this->sanitize($data, $rules);
