@@ -78,6 +78,9 @@ class SanitizerTest extends TestCase
         $this->assertEquals($sanitized, $data);
     }
 
+    /**
+     *  @test
+     */
     public function it_throws_exception_if_non_existing_filter()
     {
         $this->expectException(InvalidArgumentException::class);
