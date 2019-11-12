@@ -31,7 +31,7 @@ class FormRequest extends LaravelFormRequest
     /**
      *  Filters to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function filters()
     {
@@ -41,7 +41,7 @@ class FormRequest extends LaravelFormRequest
     /**
      *  Validation rules to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function rules()
     {
