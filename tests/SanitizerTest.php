@@ -40,7 +40,8 @@ class SanitizerTest extends TestCase
         $this->assertEquals('  HellO EverYboDy   ', $data['name']);
     }
 
-    public function test_array_filters() {
+    public function test_array_filters()
+    {
         $data = [
             'name' => '  HellO EverYboDy   ',
         ];
@@ -108,5 +109,21 @@ class SanitizerTest extends TestCase
         $this->assertArrayNotHasKey('name', $data);
         $this->assertArrayHasKey('title', $data);
         $this->assertEquals(1, count($data));
+    }
+
+    public function test_closure_rule()
+    {
+        $data = [
+            'name' => ' Sina '
+        ];
+
+        $rules = [
+            'name' => ['trim', function ($value) {
+                return strtoupper($value);
+            }]
+        ];
+
+        $data = $this->sanitize($data, $rules);
+        $this->assertEquals('SINA', $data['name']);
     }
 }
