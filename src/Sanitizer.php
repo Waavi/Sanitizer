@@ -35,6 +35,7 @@ class Sanitizer
         'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
         'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
         'digit'       => \Waavi\Sanitizer\Filters\Digit::class,
+        'filter_if'   => \Waavi\Sanitizer\Filters\FilterIf::class,
     ];
 
     /**
@@ -129,12 +130,22 @@ class Sanitizer
         foreach ($this->rules as $attr => $rules) {
             if (Arr::has($this->data, $attr)) {
                 $value = Arr::get($this->data, $attr);
+                $original = $value;
 
+                $sanitize = true;
                 foreach ($rules as $rule) {
-                    $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                    if ($rule['name'] === 'filter_if') {
+                        $sanitize = $this->applyFilter($rule['name'], $this->data, $rule['options']);
+                    } else {
+                        $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                    }
                 }
 
-                Arr::set($sanitized, $attr, $value);
+                if ($sanitize) {
+                    Arr::set($sanitized, $attr, $value);
+                } else {
+                    Arr::set($sanitized, $attr, $original);
+                }
             }
         }
 
@@ -151,8 +162,18 @@ class Sanitizer
     protected function sanitizeAttribute($attribute, $value)
     {
         if (isset($this->rules[$attribute])) {
+            $sanitize = true;
+            $original = $value;
             foreach ($this->rules[$attribute] as $rule) {
-                $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                if ($rule['name'] === 'filter_if') {
+                    $sanitize = $this->applyFilter($rule['name'], $value, $rule['options']);
+                } else {
+                    $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                }
+            }
+
+            if (!$sanitize) {
+                return $original;
             }
         }
         return $value;
