@@ -22,7 +22,7 @@ class DummyClass extends FormRequest
     /**
      *  Validation rules to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function rules()
     {
@@ -32,7 +32,7 @@ class DummyClass extends FormRequest
     /**
      *  Filters to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function filters()
     {

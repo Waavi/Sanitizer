@@ -28,6 +28,8 @@ Given a data array with the following format:
         'jsonVar'       =>  '{"name":"value"}',
         'description'   =>  '<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>',
         'phone'         =>  '+08(096)90-123-45q',
+        'country'       =>  'GB',
+        'postcode'      =>  'ab12 3de',
     ];
 ```
 We can easily format it using our Sanitizer and the some of Sanitizer's default filters:
@@ -42,6 +44,8 @@ We can easily format it using our Sanitizer and the some of Sanitizer's default 
         'jsonVar'       =>  'cast:array',
         'description'   =>  'strip_tags',
         'phone'         =>  'digit',
+        'country'       =>  'trim|escape|capitalize',
+        'postcode'      =>  'trim|escape|uppercase|filter_if:country,GB',
     ];
 
     $sanitizer  = new Sanitizer($data, $filters);
@@ -58,6 +62,8 @@ Which will yield:
         'jsonVar'       =>  '["name" => "value"]',
         'description'   =>  'Test paragraph. Other text',
         'phone'         =>  '080969012345',
+        'country'       =>  'GB',
+        'postcode'      =>  'AB12 3DE',
     ];
 ```
 It's usage is very similar to Laravel's Validator module, for those who are already familiar with it, although Laravel is not required to use this library.
@@ -79,7 +85,7 @@ The following filters are available out of the box:
  **format_date**    | Always takes two arguments, the date's given format and the target format, following DateTime notation.
  **strip_tags**    | Strip HTML and PHP tags using php's strip_tags
  **digit**    | Get only digit characters from the string
-
+ **filter_if** | Applies filters if an attribute exactly matches value
 
 ## Adding custom filters
 

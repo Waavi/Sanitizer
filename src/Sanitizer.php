@@ -36,6 +36,7 @@ class Sanitizer
         'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
         'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
         'digit'       => \Waavi\Sanitizer\Filters\Digit::class,
+        'filter_if'   => \Waavi\Sanitizer\Filters\FilterIf::class,
     ];
 
     /**
@@ -156,9 +157,22 @@ class Sanitizer
         foreach ($this->rules as $attr => $rules) {
             if (Arr::has($this->data, $attr)) {
                 $value = Arr::get($this->data, $attr);
-                foreach ($rules as $rule)
-                    $value = $this->applyFilter($rule, $value);
-                Arr::set($sanitized, $attr, $value);
+                $original = $value;
+
+                $sanitize = true;
+                foreach ($rules as $rule) {
+                    if ($rule['name'] === 'filter_if') {
+                        $sanitize = $this->applyFilter($rule['name'], $this->data, $rule['options']);
+                    } else {
+                        $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                    }
+                }
+
+                if ($sanitize) {
+                    Arr::set($sanitized, $attr, $value);
+                } else {
+                    Arr::set($sanitized, $attr, $original);
+                }
             }
         }
 
