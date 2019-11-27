@@ -161,10 +161,10 @@ class Sanitizer
 
                 $sanitize = true;
                 foreach ($rules as $rule) {
-                    if ($rule['name'] === 'filter_if') {
-                        $sanitize = $this->applyFilter($rule['name'], $this->data, $rule['options']);
+                    if (is_array($rule) && $rule['name'] === 'filter_if') {
+                        $sanitize = $this->applyFilter($rule, $this->data);
                     } else {
-                        $value = $this->applyFilter($rule['name'], $value, $rule['options']);
+                        $value = $this->applyFilter($rule, $value);
                     }
                 }
 
