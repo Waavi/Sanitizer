@@ -64,7 +64,7 @@ Which will yield:
         'jsonVar'       =>  '["name" => "value"]',
         'description'   =>  'Test paragraph. Other text',
         'phone'         =>  '080969012345',
-        'roles'         =>  ['admin','level_1_user ','level_2_user'],
+        'roles'         =>  ['admin','level_1_user','level_2_user'],
         'country'       =>  'GB',
         'postcode'      =>  'AB12 3DE',
     ];
