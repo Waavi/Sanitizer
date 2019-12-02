@@ -28,6 +28,7 @@ Given a data array with the following format:
         'jsonVar'       =>  '{"name":"value"}',
         'description'   =>  '<p>Test paragraph.</p><!-- Comment --> <a href="#fragment">Other text</a>',
         'phone'         =>  '+08(096)90-123-45q',
+        'roles'         =>  ['admin','Level_1_user ','<b>level_2_user</b>'],
         'country'       =>  'GB',
         'postcode'      =>  'ab12 3de',
     ];
@@ -44,6 +45,7 @@ We can easily format it using our Sanitizer and the some of Sanitizer's default 
         'jsonVar'       =>  'cast:array',
         'description'   =>  'strip_tags',
         'phone'         =>  'digit',
+        'roles.*'       =>  'trim|escape|lowercase',
         'country'       =>  'trim|escape|capitalize',
         'postcode'      =>  'trim|escape|uppercase|filter_if:country,GB',
     ];
@@ -62,6 +64,7 @@ Which will yield:
         'jsonVar'       =>  '["name" => "value"]',
         'description'   =>  'Test paragraph. Other text',
         'phone'         =>  '080969012345',
+        'roles'         =>  ['admin','level_1_user ','level_2_user'],
         'country'       =>  'GB',
         'postcode'      =>  'AB12 3DE',
     ];
