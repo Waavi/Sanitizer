@@ -58,7 +58,7 @@ trait SanitizesInput
     /**
      *  Filters to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function filters()
     {
@@ -68,7 +68,7 @@ trait SanitizesInput
     /**
      *  Custom Filters to be applied to the input.
      *
-     *  @return void
+     *  @return array
      */
     public function customFilters()
     {

@@ -164,6 +164,14 @@ You may also Sanitize input in your own FormRequests by using the SanitizesInput
             return [
                 'name'  => 'trim|capitalize',
                 'email' => 'trim',
+                'text'  => 'remove_strings:Curse,Words,Galore',
+            ];
+        }
+
+        public function customFilters()
+        {
+            return [
+                'remove_strings' => RemoveStringsFilter::class,
             ];
         }
 
