@@ -1,5 +1,5 @@
 {
-    "name": "francoism90/sanitizer",
+    "name": "waavi/sanitizer",
     "description": "Data sanitizer and Laravel 7 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer", "input", "transform input", "input filter"],
     "license": "MIT",
