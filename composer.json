@@ -1,6 +1,6 @@
 {
     "name": "waavi/sanitizer",
-    "description": "Data sanitizer and Laravel 5 form requests with input sanitation.",
+    "description": "Data sanitizer and Laravel 7 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer", "input", "transform input", "input filter"],
     "license": "MIT",
     "authors": [{
@@ -32,6 +32,9 @@
                 "Sanitizer": "Waavi\\Sanitizer\\Laravel\\Facade"
             }
         }
+    },
+    "config": {
+        "sort-packages": true
     },
     "minimum-stability": "dev",
     "scripts": {
