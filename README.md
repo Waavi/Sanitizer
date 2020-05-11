@@ -46,6 +46,7 @@ We can easily format it using our Sanitizer and the some of Sanitizer's default 
         'phone'         =>  'digit',
         'country'       =>  'trim|escape|capitalize',
         'postcode'      =>  'trim|escape|uppercase|filter_if:country,GB',
+        'slug'          =>  'slug',
     ];
 
     $sanitizer  = new Sanitizer($data, $filters);
@@ -64,6 +65,7 @@ Which will yield:
         'phone'         =>  '080969012345',
         'country'       =>  'GB',
         'postcode'      =>  'AB12 3DE',
+        'slug'          =>  'Jonh Doe',
     ];
 ```
 It's usage is very similar to Laravel's Validator module, for those who are already familiar with it, although Laravel is not required to use this library.
@@ -86,6 +88,7 @@ The following filters are available out of the box:
  **strip_tags**    | Strip HTML and PHP tags using php's strip_tags
  **digit**    | Get only digit characters from the string
  **filter_if** | Applies filters if an attribute exactly matches value
+ **slug** | generates a URL friendly "slug" from the given string
 
 ## Adding custom filters
 

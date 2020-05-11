@@ -37,6 +37,7 @@ class Sanitizer
         'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
         'digit'       => \Waavi\Sanitizer\Filters\Digit::class,
         'filter_if'   => \Waavi\Sanitizer\Filters\FilterIf::class,
+        'slug'        => \Waavi\Sanitizer\Filters\Slug::class,
     ];
 
     /**
