@@ -1,6 +1,6 @@
 {
     "name": "waavi/sanitizer",
-    "description": "Data sanitizer and Laravel 7 form requests with input sanitation.",
+    "description": "Data sanitizer and Laravel 8 form requests with input sanitation.",
     "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer", "input", "transform input", "input filter"],
     "license": "MIT",
     "authors": [{
@@ -8,12 +8,12 @@
         "email": "info@waavi.com"
     }],
     "require": {
-        "illuminate/support": "~5.3|~6.0|~7.0",
-        "illuminate/validation": "~5.3|~6.0|~7.0",
+        "illuminate/support": "~5.3|~6.0|~7.0|~8.0",
+        "illuminate/validation": "~5.3|~6.0|~7.0|~8.0",
         "nesbot/carbon": "~1.0|~2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.0|~7.0|~8.0"
+        "phpunit/phpunit": "~6.0|~7.0|~8.0|~9.0"
     },
     "autoload": {
         "psr-4": {
