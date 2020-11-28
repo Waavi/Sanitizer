@@ -1,7 +1,7 @@
 # Sanitizer
 
 ![https://github.com/binary-cats/sanitizer/actions](https://github.com/binary-cats/sanitizer/workflows/Laravel/badge.svg)
-![https://github.styleci.io/repos/230519748](https://github.styleci.io/repos/230519748/shield)
+![https://github.styleci.io/repos/316763653](https://github.styleci.io/repos/316763653/shield)
 ![https://scrutinizer-ci.com/g/binary-cats/sanitizer/](https://scrutinizer-ci.com/g/binary-cats/sanitizer/badges/quality-score.png?b=master)
 [![Build Status](https://img.shields.io/travis/binary-cats/sanitizer/master.svg?style=flat-square)](https://travis-ci.org/binary-cats/sanitizer)
 
