@@ -1,8 +1,8 @@
 <?php
 
-namespace Waavi\Sanitizer\Filters;
+namespace BinaryCats\Sanitizer\Filters;
 
-use Waavi\Sanitizer\Contracts\Filter;
+use BinaryCats\Sanitizer\Contracts\Filter;
 
 class FilterIf implements Filter
 {

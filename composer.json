@@ -1,23 +1,32 @@
 {
-    "name": "waavi/sanitizer",
+    "name": "binary-cats/sanitizer",
     "description": "Data sanitizer and Laravel 8 form requests with input sanitation.",
-    "keywords": ["laravel", "sanitation", "input sanitation", "input sanitizer", "input", "transform input", "input filter"],
+    "keywords": [
+        "binary cats",
+        "input filter",
+        "input sanitation",
+        "input sanitizer",
+        "input",
+        "laravel",
+        "sanitation",
+        "transform input"
+    ],
     "license": "MIT",
     "authors": [{
-        "name": "William Wallace San Paulo",
-        "email": "info@waavi.com"
+        "name": "Cyrill Kalita",
+        "email": "cyrill.kalita@gmail.com"
     }],
     "require": {
-        "illuminate/support": "~5.3|~6.0|~7.0|~8.0",
-        "illuminate/validation": "~5.3|~6.0|~7.0|~8.0",
-        "nesbot/carbon": "~1.0|~2.0"
+        "illuminate/support": "^8.0",
+        "illuminate/validation": "^8.0",
+        "nesbot/carbon": "^2.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.0|~7.0|~8.0|~9.0"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "psr-4": {
-            "Waavi\\Sanitizer\\": "src/"
+            "BinaryCats\\Sanitizer\\": "src/"
         }
     },
     "autoload-dev": {
@@ -26,10 +35,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Waavi\\Sanitizer\\Laravel\\SanitizerServiceProvider"
+                "BinaryCats\\Sanitizer\\Laravel\\SanitizerServiceProvider"
             ],
             "aliases": {
-                "Sanitizer": "Waavi\\Sanitizer\\Laravel\\Facade"
+                "Sanitizer": "BinaryCats\\Sanitizer\\Laravel\\Facade"
             }
         }
     },

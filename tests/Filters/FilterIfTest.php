@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Waavi\Sanitizer\Sanitizer;
+use BinaryCats\Sanitizer\Sanitizer;
 
 class FilterIfTest extends TestCase
 {

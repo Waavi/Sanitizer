@@ -1,6 +1,6 @@
 <?php
 
-namespace Waavi\Sanitizer\Laravel;
+namespace BinaryCats\Sanitizer\Laravel;
 
 use Illuminate\Support\ServiceProvider;
 

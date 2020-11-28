@@ -1,10 +1,10 @@
 <?php
 
-namespace Waavi\Sanitizer\Filters;
+namespace BinaryCats\Sanitizer\Filters;
 
 use Carbon\Carbon;
 use InvalidArgumentException;
-use Waavi\Sanitizer\Contracts\Filter;
+use BinaryCats\Sanitizer\Contracts\Filter;
 
 class FormatDate implements Filter
 {

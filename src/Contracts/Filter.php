@@ -1,6 +1,6 @@
 <?php
 
-namespace Waavi\Sanitizer\Contracts;
+namespace BinaryCats\Sanitizer\Contracts;
 
 interface Filter
 {

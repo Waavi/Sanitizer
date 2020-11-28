@@ -1,20 +1,20 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use Waavi\Sanitizer\Laravel\Factory;
-use Waavi\Sanitizer\Sanitizer;
+use BinaryCats\Sanitizer\Laravel\Factory;
+use BinaryCats\Sanitizer\Sanitizer;
 
 class FactoryTest extends TestCase
 {
     public function sanitize($data, $rules)
     {
         $sanitizer = new Sanitizer($data, $rules, [
-            'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
-            'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
-            'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
-            'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
-            'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
-            'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
+            'capitalize'  => \BinaryCats\Sanitizer\Filters\Capitalize::class,
+            'escape'      => \BinaryCats\Sanitizer\Filters\EscapeHTML::class,
+            'format_date' => \BinaryCats\Sanitizer\Filters\FormatDate::class,
+            'lowercase'   => \BinaryCats\Sanitizer\Filters\Lowercase::class,
+            'uppercase'   => \BinaryCats\Sanitizer\Filters\Uppercase::class,
+            'trim'        => \BinaryCats\Sanitizer\Filters\Trim::class,
         ]);
         return $sanitizer->sanitize();
     }

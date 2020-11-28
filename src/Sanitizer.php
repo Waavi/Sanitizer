@@ -1,6 +1,6 @@
 <?php
 
-namespace Waavi\Sanitizer;
+namespace BinaryCats\Sanitizer;
 
 use Closure;
 use Illuminate\Support\Arr;
@@ -27,16 +27,16 @@ class Sanitizer
      *  @var array
      */
     protected $filters = [
-        'capitalize'  => \Waavi\Sanitizer\Filters\Capitalize::class,
-        'cast'        => \Waavi\Sanitizer\Filters\Cast::class,
-        'escape'      => \Waavi\Sanitizer\Filters\EscapeHTML::class,
-        'format_date' => \Waavi\Sanitizer\Filters\FormatDate::class,
-        'lowercase'   => \Waavi\Sanitizer\Filters\Lowercase::class,
-        'uppercase'   => \Waavi\Sanitizer\Filters\Uppercase::class,
-        'trim'        => \Waavi\Sanitizer\Filters\Trim::class,
-        'strip_tags'  => \Waavi\Sanitizer\Filters\StripTags::class,
-        'digit'       => \Waavi\Sanitizer\Filters\Digit::class,
-        'filter_if'   => \Waavi\Sanitizer\Filters\FilterIf::class,
+        'capitalize'  => \BinaryCats\Sanitizer\Filters\Capitalize::class,
+        'cast'        => \BinaryCats\Sanitizer\Filters\Cast::class,
+        'escape'      => \BinaryCats\Sanitizer\Filters\EscapeHTML::class,
+        'format_date' => \BinaryCats\Sanitizer\Filters\FormatDate::class,
+        'lowercase'   => \BinaryCats\Sanitizer\Filters\Lowercase::class,
+        'uppercase'   => \BinaryCats\Sanitizer\Filters\Uppercase::class,
+        'trim'        => \BinaryCats\Sanitizer\Filters\Trim::class,
+        'strip_tags'  => \BinaryCats\Sanitizer\Filters\StripTags::class,
+        'digit'       => \BinaryCats\Sanitizer\Filters\Digit::class,
+        'filter_if'   => \BinaryCats\Sanitizer\Filters\FilterIf::class,
     ];
 
     /**

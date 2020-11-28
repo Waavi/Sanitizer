@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Waavi\Sanitizer\Laravel\SanitizesInput;
+use BinaryCats\Sanitizer\Laravel\SanitizesInput;
 
 class DummyClass extends FormRequest
 {

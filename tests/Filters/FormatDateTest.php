@@ -1,7 +1,7 @@
 <?php
 
+use BinaryCats\Sanitizer\Sanitizer;
 use PHPUnit\Framework\TestCase;
-use Waavi\Sanitizer\Sanitizer;
 
 class FormatDateTest extends TestCase
 {
