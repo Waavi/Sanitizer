@@ -1,8 +1,8 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use BinaryCats\Sanitizer\Laravel\Factory;
 use BinaryCats\Sanitizer\Sanitizer;
+use PHPUnit\Framework\TestCase;
 
 class FactoryTest extends TestCase
 {
@@ -16,6 +16,7 @@ class FactoryTest extends TestCase
             'uppercase'   => \BinaryCats\Sanitizer\Filters\Uppercase::class,
             'trim'        => \BinaryCats\Sanitizer\Filters\Trim::class,
         ]);
+
         return $sanitizer->sanitize();
     }
 
