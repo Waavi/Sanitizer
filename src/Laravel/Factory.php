@@ -2,15 +2,15 @@
 
 namespace BinaryCats\Sanitizer\Laravel;
 
-use Closure;
-use InvalidArgumentException;
 use BinaryCats\Sanitizer\Contracts\Filter;
 use BinaryCats\Sanitizer\Sanitizer;
+use Closure;
+use InvalidArgumentException;
 
 class Factory
 {
     /**
-     *  List of custom filters
+     *  List of custom filters.
      *  @var array
      */
     protected $customFilters;
@@ -26,7 +26,7 @@ class Factory
     }
 
     /**
-     *  Create a new Sanitizer instance
+     *  Create a new Sanitizer instance.
      *
      *  @param  array   $data       Data to be sanitized
      *  @param  array   $rules      Filters to be applied to the given data
@@ -35,6 +35,7 @@ class Factory
     public function make(array $data, array $rules)
     {
         $sanitizer = new Sanitizer($data, $rules, $this->customFilters);
+
         return $sanitizer;
     }
 
@@ -48,11 +49,11 @@ class Factory
      */
     public function extend($name, $customFilter)
     {
-        if (empty($name) || !is_string($name)) {
+        if (empty($name) || ! is_string($name)) {
             throw new InvalidArgumentException('The Sanitizer filter name must be a non-empty string.');
         }
 
-        if (!($customFilter instanceof Closure) && !in_array(Filter::class, class_implements($customFilter))) {
+        if (! ($customFilter instanceof Closure) && ! in_array(Filter::class, class_implements($customFilter))) {
             throw new InvalidArgumentException('Custom filter must be a Closure or a class implementing the BinaryCats\Sanitizer\Contracts\Filter interface.');
         }
 

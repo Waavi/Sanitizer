@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use BinaryCats\Sanitizer\Sanitizer;
+use PHPUnit\Framework\TestCase;
 
 class FilterIfTest extends TestCase
 {
@@ -13,6 +13,7 @@ class FilterIfTest extends TestCase
     public function sanitize($data, $rules)
     {
         $sanitizer = new Sanitizer($data, $rules);
+
         return $sanitizer->sanitize();
     }
 
