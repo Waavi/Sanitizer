@@ -9,6 +9,8 @@
 
 Sanitizer provides your Laravel application with an easy way to format user input, both through the provided filters or through custom ones that can easily be added to the Sanitizer library.
 
+<p align="center"><img src="https://repository-images.githubusercontent.com/316763653/71c29400-3164-11eb-8a35-d4b16ac34253" width="600"></p>
+
 ## Example
 
 Given a data array with the following format:
