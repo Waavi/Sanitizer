@@ -2,8 +2,8 @@
 
 namespace BinaryCats\Sanitizer\Filters;
 
-use Illuminate\Support\Collection;
 use BinaryCats\Sanitizer\Contracts\Filter;
+use Illuminate\Support\Collection;
 
 class Cast implements Filter
 {
@@ -35,6 +35,7 @@ class Cast implements Filter
                 return json_decode($value, true);
             case 'collection':
                 $array = is_array($value) ? $value : json_decode($value, true);
+
                 return new Collection($array);
             default:
                 throw new \InvalidArgumentException("Wrong Sanitizer casting format: {$type}.");

@@ -4,26 +4,26 @@ namespace BinaryCats\Sanitizer;
 
 use Closure;
 use Illuminate\Support\Arr;
-use Illuminate\Validation\ValidationRuleParser;
 use Illuminate\Validation\ClosureValidationRule;
+use Illuminate\Validation\ValidationRuleParser;
 use InvalidArgumentException;
 
 class Sanitizer
 {
     /**
-     *  Data to sanitize
+     *  Data to sanitize.
      *  @var array
      */
     protected $data;
 
     /**
-     *  Filters to apply
+     *  Filters to apply.
      *  @var array
      */
     protected $rules;
 
     /**
-     *  Available filters as $name => $classPath
+     *  Available filters as $name => $classPath.
      *  @var array
      */
     protected $filters = [
@@ -49,8 +49,8 @@ class Sanitizer
      */
     public function __construct(array $data, array $rules, array $customFilters = [])
     {
-        $this->data    = $data;
-        $this->rules   = $this->parseRules($rules);
+        $this->data = $data;
+        $this->rules = $this->parseRules($rules);
         $this->filters = array_merge($this->filters, $customFilters);
     }
 
@@ -91,12 +91,12 @@ class Sanitizer
         } elseif ($rule instanceof ClosureValidationRule) {
             return $rule->callback;
         } else {
-            throw new InvalidArgumentException("Unsupported rule type.");
+            throw new InvalidArgumentException('Unsupported rule type.');
         }
     }
 
     /**
-     *  Parse a rule string formatted as filterName:option1, option2 into an array formatted as [name => filterName, options => [option1, option2]]
+     *  Parse a rule string formatted as filterName:option1, option2 into an array formatted as [name => filterName, options => [option1, option2]].
      *
      *  @param  string $rule    Formatted as 'filterName:option1, option2' or just 'filterName'
      *  @return array           Formatted as [name => filterName, options => [option1, option2]]. Empty array if no filter name was found.
@@ -104,20 +104,21 @@ class Sanitizer
     protected function parseRuleString($rule)
     {
         if (strpos($rule, ':') !== false) {
-            list($name, $options) = explode(':', $rule, 2);
-            $options              = array_map('trim', explode(',', $options));
+            [$name, $options] = explode(':', $rule, 2);
+            $options = array_map('trim', explode(',', $options));
         } else {
-            $name    = $rule;
+            $name = $rule;
             $options = [];
         }
-        if (!$name) {
+        if (! $name) {
             return [];
         }
+
         return compact('name', 'options');
     }
 
     /**
-     *  Apply the given filter by its name
+     *  Apply the given filter by its name.
      *
      *  @param  string|Closure $rule
      *  @return Filter
@@ -128,11 +129,11 @@ class Sanitizer
             return call_user_func($rule, $value);
         }
 
-        $name    = $rule['name'];
+        $name = $rule['name'];
         $options = $rule['options'];
 
         // If the filter does not exist, throw an Exception:
-        if (!isset($this->filters[$name])) {
+        if (! isset($this->filters[$name])) {
             throw new InvalidArgumentException("No filter found by the name of $name");
         }
 
@@ -146,7 +147,7 @@ class Sanitizer
     }
 
     /**
-     *  Sanitize the given data
+     *  Sanitize the given data.
      *
      *  @return array
      */

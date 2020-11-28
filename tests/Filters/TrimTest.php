@@ -13,6 +13,7 @@ class TrimTest extends TestCase
     public function sanitize($data, $rules)
     {
         $sanitizer = new Sanitizer($data, $rules);
+
         return $sanitizer->sanitize();
     }
 
