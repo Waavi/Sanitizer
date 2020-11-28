@@ -1,7 +1,7 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use BinaryCats\Sanitizer\Sanitizer;
+use PHPUnit\Framework\TestCase;
 
 class CastTest extends TestCase
 {
@@ -15,6 +15,7 @@ class CastTest extends TestCase
     public function sanitize($data, $rules)
     {
         $sanitizer = new Sanitizer($data, $rules);
+
         return $sanitizer->sanitize();
     }
 
@@ -86,7 +87,7 @@ class CastTest extends TestCase
             'cost' => 15.6,
         ];
         $encodedData = $data;
-        $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:object']);
+        $results = $this->sanitize(['var' => $encodedData], ['var' => 'cast:object']);
         $this->assertInstanceOf('stdClass', $results['var']);
         $this->assertEquals('Name', $results['var']->name);
         $this->assertEquals(15.6, $results['var']->cost);
@@ -102,7 +103,7 @@ class CastTest extends TestCase
             'cost' => 15.6,
         ];
         $encodedData = json_encode($data);
-        $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:object']);
+        $results = $this->sanitize(['var' => $encodedData], ['var' => 'cast:object']);
         $this->assertInstanceOf('stdClass', $results['var']);
         $this->assertEquals('Name', $results['var']->name);
         $this->assertEquals(15.6, $results['var']->cost);
@@ -118,7 +119,7 @@ class CastTest extends TestCase
             'cost' => 15.6,
         ];
         $encodedData = json_encode($data);
-        $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:array']);
+        $results = $this->sanitize(['var' => $encodedData], ['var' => 'cast:array']);
         $this->assertIsArray($results['var']);
         $this->assertEquals('Name', $results['var']['name']);
         $this->assertEquals(15.6, $results['var']['cost']);
@@ -134,7 +135,7 @@ class CastTest extends TestCase
             'cost' => 15.6,
         ];
         $encodedData = $data;
-        $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:collection']);
+        $results = $this->sanitize(['var' => $encodedData], ['var' => 'cast:collection']);
         $this->assertInstanceOf('\Illuminate\Support\Collection', $results['var']);
         $this->assertEquals('Name', $results['var']->first());
     }
@@ -149,7 +150,7 @@ class CastTest extends TestCase
             'cost' => 15.6,
         ];
         $encodedData = json_encode($data);
-        $results     = $this->sanitize(['var' => $encodedData], ['var' => 'cast:collection']);
+        $results = $this->sanitize(['var' => $encodedData], ['var' => 'cast:collection']);
         $this->assertInstanceOf('\Illuminate\Support\Collection', $results['var']);
         $this->assertEquals('Name', $results['var']->first());
     }

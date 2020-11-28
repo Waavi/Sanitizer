@@ -16,7 +16,7 @@ trait SanitizesInput
     }
 
     /**
-     *  Sanitize this request's input
+     *  Sanitize this request's input.
      *
      *  @return void
      */
@@ -28,7 +28,7 @@ trait SanitizesInput
     }
 
     /**
-     *  Add custom fields to the Sanitizer
+     *  Add custom fields to the Sanitizer.
      *
      *  @return void
      */
