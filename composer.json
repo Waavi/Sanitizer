@@ -1,6 +1,6 @@
 {
     "name": "binary-cats/sanitizer",
-    "description": "Data sanitizer and Laravel 8 form requests with input sanitation.",
+    "description": "Data sanitizer and Laravel form requests with input sanitation.",
     "keywords": [
         "binary cats",
         "input filter",
@@ -17,8 +17,8 @@
         "email": "cyrill.kalita@gmail.com"
     }],
     "require": {
-        "illuminate/support": "^8.0",
-        "illuminate/validation": "^8.0",
+        "illuminate/support": "^8.0|^9.0",
+        "illuminate/validation": "^8.0|^9.0",
         "nesbot/carbon": "^2.0"
     },
     "require-dev": {
